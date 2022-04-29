@@ -11,7 +11,8 @@ export class ImageThumbnailComponent implements OnInit {
 
   @Input() imageUrl: string;
   @Input() title: string;
-
+  @Input() isSmall: boolean;
+  
   constructor(
     private dialog: MatDialog
   ) { }

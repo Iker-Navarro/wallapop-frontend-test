@@ -12,7 +12,6 @@ import { Item } from 'src/app/shared/model/Item';
 })
 export class ItemManagerComponent implements OnInit, AfterViewInit {
   
-  @ViewChild(MatTable) table: MatTable<Item[]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

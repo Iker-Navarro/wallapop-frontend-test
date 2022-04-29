@@ -1,1 +1,51 @@
 @import "/src/app/shared/variables.scss";
+
+.favorites-container{
+  min-width: 350px;
+
+  .mat-column{
+    &-image{
+      flex: 0 0 calc($sm-img-thumbnail-size + $margin-s);
+    }
+  
+    // &-title{
+    // }
+
+    &-actions{
+      flex: 0 0 25%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .mat-cell{
+    padding: $padding-s $padding-m;
+  }
+  
+  .mat-header-cell{
+    padding: 0 $padding-m;
+    font-size: $font-title;
+  }
+
+  .nothing-found{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+
+    &__title{
+      font-size: $font-title;
+      border-bottom: 1px solid $lightest-grey;
+      margin-bottom: $margin-m;
+    }
+
+    &__message{
+      text-align: justify;
+      margin-bottom: $margin-m;
+    }
+    
+    &__button{
+      margin-left: auto;
+    }
+  }
+}
+

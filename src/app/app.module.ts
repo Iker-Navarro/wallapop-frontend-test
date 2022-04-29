@@ -15,6 +15,7 @@ import { ImageThumbnailComponent } from './shared/components/image-thumbnail/ima
 
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
+import { ItemManagerHeaderComponent } from './components/item-manager/item-manager-header/item-manager-header.component';
 
 registerLocaleData(es);
 
@@ -27,7 +28,8 @@ registerLocaleData(es);
     ItemManagerComponent,
     FavoriteItemsDialogComponent,
     ImageDisplayComponent,
-    ImageThumbnailComponent
+    ImageThumbnailComponent,
+    ItemManagerHeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 <img 
-  class="thumbnail pointer" 
+  class="pointer thumbnail"
+  [ngClass]="{'sm': isSmall}"
   [src]="imageUrl" 
   [alt]="title"
   (click)="showFullSize()"
