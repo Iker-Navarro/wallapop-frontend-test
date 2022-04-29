@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,6 +12,12 @@ import { FavoriteItemsDialogComponent } from './components/favorite-items-dialog
 import { MaterialModule } from './shared/modules/material.module';
 import { ImageDisplayComponent } from './shared/components/image-display/image-display.component';
 import { ImageThumbnailComponent } from './shared/components/image-thumbnail/image-thumbnail.component';
+
+import { registerLocaleData } from '@angular/common';
+import es from '@angular/common/locales/es';
+
+registerLocaleData(es);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +35,7 @@ import { ImageThumbnailComponent } from './shared/components/image-thumbnail/ima
     HttpClientModule,
     MaterialModule
   ],
+  providers: [ { provide: LOCALE_ID, useValue: 'es-ES' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
