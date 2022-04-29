@@ -1,0 +1,9 @@
+@import "/src/app/shared/variables.scss";
+
+.thumbnail{
+  margin: $margin-s;
+  border-radius: $border-radius;
+  width: $img-thumbnail-size;
+  height: $img-thumbnail-size;
+  object-fit: cover;
+}

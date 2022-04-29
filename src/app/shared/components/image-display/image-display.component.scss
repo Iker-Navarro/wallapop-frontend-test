@@ -1,0 +1,13 @@
+@import "/src/app/shared/variables.scss";
+
+.container{
+  &__title{
+    font-size: $font-title;
+    border-bottom: 0.5px solid $light-grey;
+    margin-bottom: $margin-s;
+  }
+
+  &__image{
+    border-radius: $border-radius;
+  }
+}
