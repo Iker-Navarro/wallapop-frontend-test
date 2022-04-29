@@ -1,1 +1,14 @@
 @import "/src/app/shared/variables.scss";
+
+.footer-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+
+  &__content{
+    margin-bottom: $margin-s;
+    color: $light-grey;
+  }
+}
