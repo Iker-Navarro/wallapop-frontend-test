@@ -43,6 +43,10 @@ export class ItemManagerComponent implements OnInit, AfterViewInit {
     this.itemsDataSource.sort = this.sort;
   }
 
+  public changeFavorite(item: Item){
+    this.itemService.changeFavorites(item);
+  }
+
   private initializeItems(items: Item[]){
     this.itemsDataSource.data = items;
   }

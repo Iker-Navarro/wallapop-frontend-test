@@ -4,4 +4,5 @@ export interface Item {
   email: string;
   image: string;
   price: string;
+  isFavorite: boolean;
 }
