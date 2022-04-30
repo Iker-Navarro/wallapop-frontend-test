@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, catchError, EMPTY, Observable, BehaviorSubject } from 'rxjs';
+import { map, catchError, EMPTY, Observable, BehaviorSubject, tap, ReplaySubject } from 'rxjs';
 import { baseApiUrl } from '../shared/constants';
 import { Item } from '../shared/model/Item';
 import { ItemsResponse } from '../shared/model/itemsResponse';
+import { MinMax } from '../shared/model/minMax';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class ItemService {
   private currentFavorites: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([]); 
   public currentFavorites$: Observable<Item[]> = this.currentFavorites.asObservable();
 
+  private minMaxPrices: ReplaySubject<MinMax> = new ReplaySubject<MinMax>();
+  public minMaxPrices$: Observable<MinMax> = this.minMaxPrices.asObservable();
 
+  // {min:number, max:number}
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar
@@ -31,6 +35,13 @@ export class ItemService {
           item.isFavorite = false;
           return item;
         }); 
+      }),
+      tap((items: Item[])=>{
+        const prices: number[] = items.map((item: Item) => Number(item.price));
+        this.minMaxPrices.next({
+          min: Math.min(...prices),
+          max: Math.max(...prices)
+        })
       }),
       catchError(err => {
         this.onError("Error ocurred while getting the item data!")

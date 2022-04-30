@@ -12,4 +12,8 @@ export class ItemManagerHeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  applyFilter(event:any){
+    console.log(event);
+    
+  }
 }

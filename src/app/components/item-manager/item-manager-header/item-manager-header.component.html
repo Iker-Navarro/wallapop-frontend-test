@@ -1,1 +1,7 @@
-<p>item-manager-header works!</p>
+<div class="item-mng-header">
+  <div class="item-mng-header__title">Item manager</div>
+  <mat-form-field class="item-mng-header__searcher" appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+</div> 

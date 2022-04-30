@@ -1,0 +1,50 @@
+@import "/src/app/shared/variables.scss";
+
+.container{
+  &__title{
+    font-size: $font-large;
+  }
+  &__slider{
+    ::ng-deep{
+      .ngx-slider-bar {
+        background: $primary-light-color;
+        height: 2px;
+      }
+
+      .ngx-slider-selection {
+        background: $primary-color;
+      }
+    
+      .ngx-slider-pointer {
+        width: 8px;
+        height: 16px;
+        top: auto;
+        bottom: 0;
+        background-color: #333;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+    
+      .ngx-slider-pointer:after {
+        display: none;
+      }
+    
+      .ngx-slider-bubble {
+        bottom: 14px;
+      }
+    
+      .ngx-slider-limit {
+        display: none;
+      }
+    
+      .ngx-slider-tick {
+        width: 1px;
+        height: 10px;
+        margin-left: 4px;
+        border-radius: 0;
+        background: #ffe4d1;
+        top: -1px;
+      }
+    }
+  }
+}

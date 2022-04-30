@@ -16,6 +16,11 @@ import { ImageThumbnailComponent } from './shared/components/image-thumbnail/ima
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { ItemManagerHeaderComponent } from './components/item-manager/item-manager-header/item-manager-header.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { ItemSearcherComponent } from './components/item-manager/item-searcher/item-searcher.component';
+import { ItemTableComponent } from './components/item-manager/item-table/item-table.component';
+import { SearcherComponent } from './shared/components/searcher/searcher.component';
+import { PriceRangeSliderComponent } from './components/item-manager/item-searcher/price-range-slider/price-range-slider.component';
 
 registerLocaleData(es);
 
@@ -29,13 +34,18 @@ registerLocaleData(es);
     FavoriteItemsDialogComponent,
     ImageDisplayComponent,
     ImageThumbnailComponent,
-    ItemManagerHeaderComponent
+    ItemManagerHeaderComponent,
+    ItemSearcherComponent,
+    ItemTableComponent,
+    SearcherComponent,
+    PriceRangeSliderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    NgxSliderModule
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'es-ES' } ],
   bootstrap: [AppComponent]

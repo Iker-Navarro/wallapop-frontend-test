@@ -1,0 +1,19 @@
+@import "/src/app/shared/variables.scss";
+
+.item-mng-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $lightest-grey;
+
+  margin-bottom: $margin-l;
+
+  &__title{
+    font-size: $font-title;
+    margin-bottom: $margin-m;
+  }
+
+  &__searcher{
+
+  }
+}

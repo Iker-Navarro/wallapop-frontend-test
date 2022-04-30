@@ -1,37 +1,24 @@
 @import "/src/app/shared/variables.scss";
 
-.mat-column{
-  &-image{
-    flex: 0 0 calc($img-thumbnail-size + $margin-s);
+.mng-container{
+  &__header{
+    &__title{
+      font-size: $font-title;
+      padding: 0 $padding-s $padding-s;
+      border-bottom: 1px solid $lightest-grey;
+      margin-bottom: $margin-l;
+    }
   }
 
-  &-title{
-    flex: 0 0 5%;
-  }
+  &__main{
+    display: flex;
 
-  &-description{
-    text-align: justify;
-  }
-  
-  &-price{
-    flex: 0 0 5%;
-    text-align: center;
-  }
-  
-  &-email{
-    flex: 0 0 10%;
-  }
+    &__menu{
+      flex-basis: 22%;
+    }
 
-  &-actions{
-    flex: 0 0 10%;
+    &__content{
+      flex-basis: 78%;
+    }
   }
-}
-
-.mat-cell{
-  padding: $padding-m;
-}
-
-.mat-header-cell{
-  padding: 0 $padding-m;
-  font-size: $font-title;
 }

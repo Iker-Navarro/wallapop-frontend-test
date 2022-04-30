@@ -1,0 +1,11 @@
+@import "/src/app/shared/variables.scss";
+
+.searcher{
+  margin-bottom: $margin-l;
+  &__title{
+    font-size: $font-large;
+  }
+  &__input{
+    width: 100% !important;
+  }
+}

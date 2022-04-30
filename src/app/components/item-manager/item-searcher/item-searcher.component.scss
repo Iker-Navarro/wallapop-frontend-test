@@ -1,0 +1,18 @@
+@import "/src/app/shared/variables.scss";
+
+.searcher{
+  padding: $padding-l;
+  &__title{
+    font-size: $font-large;
+  }
+
+  &__generic{
+    margin-bottom: $margin-l;
+  }
+
+  &__specific{
+    .expansion-title{
+      margin-left: $margin-s;
+    }
+  }
+}

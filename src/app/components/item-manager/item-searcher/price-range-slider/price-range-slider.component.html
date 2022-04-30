@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="container__title">
+    Search by price range:
+  </div>
+  <ng-container *ngIf="load">
+    <ngx-slider
+      class="container__slider" 
+      [(value)]="minValue" 
+      [(highValue)]="maxValue" 
+      [options]="options"
+      (userChangeEnd)="onChange($event)"
+    ></ngx-slider>
+  </ng-container>
+</div>

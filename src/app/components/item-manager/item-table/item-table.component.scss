@@ -1,0 +1,39 @@
+@import "/src/app/shared/variables.scss";
+
+.table{
+  .mat-column{
+    &-image{
+      flex: 0 0 calc($img-thumbnail-size + $margin-s);
+    }
+  
+    &-title{
+      flex: 0 0 5%;
+    }
+  
+    &-description{
+      text-align: justify;
+    }
+    
+    &-price{
+      flex: 0 0 5%;
+      text-align: center;
+    }
+    
+    &-email{
+      flex: 0 0 10%;
+    }
+  
+    &-actions{
+      flex: 0 0 10%;
+    }
+  }
+  
+  .mat-cell{
+    padding: $padding-m;
+  }
+  
+  .mat-header-cell{
+    padding: 0 $padding-m;
+    font-size: $font-large;
+  }
+}

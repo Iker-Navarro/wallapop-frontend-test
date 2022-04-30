@@ -1,0 +1,47 @@
+<div class="searcher">
+  <div class="searcher__title">
+    Filter items
+  </div>
+  <div class="searcher__generic">
+    <app-searcher
+      [label]="'Search items'"
+      [icon]="'search'"
+      [placeholder]="'Bolso...'"
+    ></app-searcher>
+  </div>
+  <div class="searcher__specific">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> 
+          <mat-icon>filter_list</mat-icon>
+          <span class="expansion-title">advanced search</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <app-searcher
+        [title]="'Search by title:'" 
+        [label]="'Search items'"
+        [icon]="'title'"
+        [placeholder]="'Bolso...'"
+      ></app-searcher>
+
+      <app-searcher 
+        [title]="'Search by description:'" 
+        [label]="'Search items'" 
+        [icon]="'short_text'" 
+        [placeholder]="'Bolso...'">
+      </app-searcher>
+
+      
+     <app-price-range-slider (valueChange)="true"></app-price-range-slider>
+      
+      <app-searcher
+        [title]="'Search by email:'" 
+        [label]="'Search items'"
+        [icon]="'alternate_email'"
+        [placeholder]="'Bolso...'"
+      ></app-searcher>
+
+    </mat-expansion-panel>
+  </div>
+</div>
