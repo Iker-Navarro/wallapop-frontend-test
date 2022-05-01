@@ -1,5 +1,8 @@
 @import "/src/app/shared/variables.scss";
 
-.spacer {
-  flex: 1 1 auto;
+.header{
+  padding: 0 calc($margin-l + $margin-xxl);
+  &__spacer{
+    flex: 1 1 auto;
+  }
 }

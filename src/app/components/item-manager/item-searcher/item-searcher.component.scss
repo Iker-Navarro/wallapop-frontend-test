@@ -1,7 +1,10 @@
 @import "/src/app/shared/variables.scss";
 
 .searcher{
+  background-color: $darker-white;
   padding: $padding-l;
+  border-radius: $border-radius;
+
   &__title{
     font-size: $font-large;
   }
@@ -11,8 +14,50 @@
   }
 
   &__specific{
-    .expansion-title{
+    &__expansion-panel{
+      background-color: $dark-white;
+    }
+
+    &__expansion-title{
       margin-left: $margin-s;
+    }
+
+    &__note{
+      position: relative;
+      border-radius: $border-radius;
+      background-color: $warning-color;
+      margin-bottom: $margin-m;
+      color: $grey;
+      padding: $padding-m;
+      box-shadow: 2px 2px 4px 0px $lightest-grey;
+      
+      &__title{
+        font-size: $font-large;
+        border-bottom: 1px solid $lightest-grey;
+        margin-bottom: $margin-s
+      }
+
+      &__close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: scale(0.6);
+        padding: $padding-s;
+      }
+
+      &__text{
+        text-align: justify;
+      }
+    }
+
+    &__btn-group{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button{
+        width: 45% !important;
+      }
     }
   }
 }

@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, catchError, EMPTY, Observable, BehaviorSubject, tap, ReplaySubject } from 'rxjs';
+import { map, catchError, Observable, BehaviorSubject, tap, ReplaySubject, Subject } from 'rxjs';
 import { baseApiUrl } from '../shared/constants';
+import { FilterEvent } from '../shared/model/filterEvent';
 import { Item } from '../shared/model/Item';
 import { ItemsResponse } from '../shared/model/itemsResponse';
 import { MinMax } from '../shared/model/minMax';
@@ -18,10 +19,12 @@ export class ItemService {
   private currentFavorites: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([]); 
   public currentFavorites$: Observable<Item[]> = this.currentFavorites.asObservable();
 
+  private applyFilter: Subject<FilterEvent> = new Subject<FilterEvent>();
+  public applyFilter$: Observable<FilterEvent> = this.applyFilter.asObservable();
+
   private minMaxPrices: ReplaySubject<MinMax> = new ReplaySubject<MinMax>();
   public minMaxPrices$: Observable<MinMax> = this.minMaxPrices.asObservable();
 
-  // {min:number, max:number}
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar
@@ -48,6 +51,10 @@ export class ItemService {
         throw err;
       })
     )
+  }
+
+  public changeFilter(filter: FilterEvent){
+    this.applyFilter.next(filter);
   }
 
   public changeFavorites(item: Item){

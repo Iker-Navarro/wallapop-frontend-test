@@ -43,6 +43,7 @@ export class FavoriteItemsDialogComponent implements OnInit, OnDestroy, AfterVie
   ngAfterViewInit(): void {
     this.favoritesDataSource.paginator = this.paginator;
     this.favoritesDataSource.sort = this.sort;
+    this.favoritesDataSource.filterPredicate = this.getTitleFilterPredicate();
   }
 
   ngOnDestroy(): void {
@@ -53,7 +54,18 @@ export class FavoriteItemsDialogComponent implements OnInit, OnDestroy, AfterVie
     this.itemService.changeFavorites(item);
   }
 
+  public search(term: string){
+    this.favoritesDataSource.filter = term;
+  }
+
   public close(){
     this.dialogRef.close();
+  }
+
+  private getTitleFilterPredicate(){
+    const filterPredicate = (item: Item, filter: string) => {
+      return item.title.toUpperCase().includes(filter.toUpperCase());
+    }
+    return filterPredicate;
   }
 }

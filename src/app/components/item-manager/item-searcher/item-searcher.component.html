@@ -1,47 +1,83 @@
 <div class="searcher">
+
   <div class="searcher__title">
     Filter items
   </div>
+
   <div class="searcher__generic">
     <app-searcher
+      [clearEvent]="clearGnrSearchForm$"
       [label]="'Search items'"
       [icon]="'search'"
       [placeholder]="'Bolso...'"
+      (onKeyUp)="genericSearch($event)"
     ></app-searcher>
   </div>
+
   <div class="searcher__specific">
-    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel class="searcher__specific__expansion-panel">
+
       <mat-expansion-panel-header>
         <mat-panel-title> 
           <mat-icon>filter_list</mat-icon>
-          <span class="expansion-title">advanced search</span>
+          <span class="searcher__specific__expansion-title">advanced search</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
       
+      <div 
+        class="searcher__specific__note" 
+        *ngIf="displayNote"
+      > 
+        <div class="searcher__specific__note__title">
+          Warning!
+        </div>
+        <mat-icon 
+          class="searcher__specific__note__close pointer"
+          (click)="displayNote = !displayNote"
+        >
+          close
+        </mat-icon>
+        <div class="searcher__specific__note__text">
+          Using the advanced search will clear any search done with the general search option available above.
+        </div>
+      </div>
+      
       <app-searcher
+        [clearEvent]="clearAdvSearchForm$"
         [title]="'Search by title:'" 
-        [label]="'Search items'"
+        [label]="'Title'"
         [icon]="'title'"
         [placeholder]="'Bolso...'"
+        (onChange)="itemFilter.title = $event"
       ></app-searcher>
 
       <app-searcher 
+        [clearEvent]="clearAdvSearchForm$"
         [title]="'Search by description:'" 
-        [label]="'Search items'" 
+        [label]="'Description'" 
         [icon]="'short_text'" 
-        [placeholder]="'Bolso...'">
+        [placeholder]="'Vendo sofá...'">
+        (onChange)="itemFilter.description = $event"
       </app-searcher>
-
       
-     <app-price-range-slider (valueChange)="true"></app-price-range-slider>
+      <app-price-range-slider 
+        [clearEvent]="clearAdvSearchForm$"
+        (onChange)="itemFilter.priceRange = $event"
+      ></app-price-range-slider>
       
       <app-searcher
+        [clearEvent]="clearAdvSearchForm$"
         [title]="'Search by email:'" 
-        [label]="'Search items'"
+        [label]="'Email'"
         [icon]="'alternate_email'"
-        [placeholder]="'Bolso...'"
+        [placeholder]="'iphonemail@wa...'"
+        (onChange)="itemFilter.email = $event"
       ></app-searcher>
 
+      <div class="searcher__specific__btn-group">
+        <button mat-stroked-button color="warn" (click)="clearForm()">Clear</button>
+        <button mat-raised-button color="primary" (click)="advancedSearch()">Search</button>
+      </div>
     </mat-expansion-panel>
   </div>
 </div>

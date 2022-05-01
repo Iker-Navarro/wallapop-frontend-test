@@ -15,10 +15,34 @@
 
     &__menu{
       flex-basis: 22%;
+      margin-right: $margin-m;
     }
 
     &__content{
       flex-basis: 78%;
+      margin-left: $margin-m;
+
+    }
+  }
+  
+
+  @media (max-width: 769px) {
+    &__main{
+      flex-direction: column;
+
+      &__menu{
+        flex-basis: auto;
+        margin-right: 0;
+        margin-bottom: $margin-l;
+      }
+  
+      &__content{
+        flex-basis: auto;
+        margin-left: 0;
+  
+      }
     }
   }
 }
+
+

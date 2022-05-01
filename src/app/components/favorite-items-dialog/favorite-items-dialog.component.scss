@@ -1,7 +1,15 @@
 @import "/src/app/shared/variables.scss";
 
 .favorites-container{
-  min-width: 350px;
+  min-width: 400px;
+
+  .header{
+    &__title{
+      font-size: $font-title;
+      border-bottom: 1px solid $lightest-grey;
+      margin-bottom: $margin-m;
+    }
+  }
 
   .mat-column{
     &-image{
@@ -28,7 +36,7 @@
   }
 
   .nothing-found{
-    width: 350px;
+    width: 400px;
     display: flex;
     flex-direction: column;
 

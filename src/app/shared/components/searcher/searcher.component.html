@@ -3,7 +3,14 @@
   <mat-form-field class="searcher__input mat-form-field-no-padding" appearance="outline">
     <mat-label>{{ label }}</mat-label>
     <mat-icon matPrefix>{{ icon }}</mat-icon>
-    <input matInput type="text" [placeholder]="placeholder"/>
+    <input 
+      #inputElement
+      matInput 
+      type="text" 
+      [placeholder]="placeholder"
+      (keyup)="keyUp($event)"
+      (change)="change($event)"
+    />
   </mat-form-field>
 </div>
 

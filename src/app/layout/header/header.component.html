@@ -1,11 +1,12 @@
-<mat-toolbar>
-  <span>Wallapop Frontend Test</span>
-  <span class="spacer"></span>
+<mat-toolbar class="header">
+  <span class="header__title">Wallapop Frontend Test</span>
+  <span class="header__spacer"></span>
   <button 
+    class="header__button"
     mat-raised-button 
     [color]="favoriteAmount > 0 ? 'primary' : ''" 
     (click)="openFavorites()"
   >
-    favourites ({{favoriteAmount}})
+    my favourites ({{favoriteAmount}})
   </button>
 </mat-toolbar>

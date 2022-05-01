@@ -1,56 +1,69 @@
-<mat-table #test [dataSource]="itemsDataSource" class="mat-elevation-z8 table" matSort>
-  <ng-container matColumnDef="image">
-    <mat-header-cell mat-header-cell *matHeaderCellDef>  </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item">
-      <app-image-thumbnail 
-        [imageUrl]="item.image" 
-        [title]="item.title"
-        [isSmall]="false"
-      ></app-image-thumbnail>
-    </mat-cell>
+<div class="table-container">
+  <ng-container *ngIf="this.itemsDataSource && this.itemsDataSource.filteredData.length > 0; else isEmpty">
+    <mat-table #test [dataSource]="itemsDataSource" class="table-container__table" matSort>
+      <ng-container matColumnDef="image">
+        <mat-header-cell mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item">
+          <app-image-thumbnail 
+            [imageUrl]="item.image" 
+            [title]="item.title"
+            [isSmall]="false"
+          ></app-image-thumbnail>
+        </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="title">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item">{{item.title}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="description">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="price">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item"> {{item.price | currency: 'EUR':'symbol':undefined:'es-ES'}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item"> {{item.email}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="actions">
+        <mat-header-cell  *matHeaderCellDef> </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let item"> 
+          <button 
+            mat-stroked-button
+            [color]="item.isFavorite ? 'warn' : 'primary'" 
+            (click)="changeFavorite(item)"
+          >
+            {{
+              item.isFavorite ? 'Remove favourite' : 'Make favourite'
+            }}
+          </button>
+        </mat-cell>
+      </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </ng-container>
 
-  <ng-container matColumnDef="title">
-    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item">{{item.title}} </mat-cell>
-  </ng-container>
+  <ng-template #isEmpty>
+    <div class="table-container__empty">
+      Oops! Nothing was found following the specified criteria!
+    </div>
+  </ng-template>
 
-  <ng-container matColumnDef="description">
-    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="price">
-    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item"> {{item.price | currency: 'EUR':'symbol':undefined:'es-ES'}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="email">
-    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item"> {{item.email}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <mat-header-cell  *matHeaderCellDef> </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let item"> 
-      <button 
-        mat-stroked-button
-        [color]="item.isFavorite ? 'warn' : 'primary'" 
-        (click)="changeFavorite(item)"
-      >
-        {{
-          item.isFavorite ? 'Remove favourite' : 'Make favourite'
-        }}
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-<mat-paginator 
-  [pageSizeOptions]="[5]" 
-  [hidePageSize]="true"
-  [showFirstLastButtons]="true"
-  aria-label="Select page of items"
-></mat-paginator>
+  <mat-paginator 
+    class="table-container__paginator"
+    [ngClass]="{'hidden-important': !this.itemsDataSource || this.itemsDataSource.filteredData.length == 0}"
+    [pageSizeOptions]="[5]" 
+    [hidePageSize]="true"
+    [showFirstLastButtons]="true"
+    aria-label="Select page of items"
+  ></mat-paginator>
+</div>

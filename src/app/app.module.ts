@@ -12,15 +12,16 @@ import { FavoriteItemsDialogComponent } from './components/favorite-items-dialog
 import { MaterialModule } from './shared/modules/material.module';
 import { ImageDisplayComponent } from './shared/components/image-display/image-display.component';
 import { ImageThumbnailComponent } from './shared/components/image-thumbnail/image-thumbnail.component';
-
-import { registerLocaleData } from '@angular/common';
-import es from '@angular/common/locales/es';
-import { ItemManagerHeaderComponent } from './components/item-manager/item-manager-header/item-manager-header.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ItemSearcherComponent } from './components/item-manager/item-searcher/item-searcher.component';
 import { ItemTableComponent } from './components/item-manager/item-table/item-table.component';
 import { SearcherComponent } from './shared/components/searcher/searcher.component';
 import { PriceRangeSliderComponent } from './components/item-manager/item-searcher/price-range-slider/price-range-slider.component';
+import { FormsModule } from '@angular/forms';
+
+import { registerLocaleData } from '@angular/common';
+import es from '@angular/common/locales/es';
+
 
 registerLocaleData(es);
 
@@ -34,7 +35,6 @@ registerLocaleData(es);
     FavoriteItemsDialogComponent,
     ImageDisplayComponent,
     ImageThumbnailComponent,
-    ItemManagerHeaderComponent,
     ItemSearcherComponent,
     ItemTableComponent,
     SearcherComponent,
@@ -45,6 +45,7 @@ registerLocaleData(es);
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    FormsModule,
     NgxSliderModule
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'es-ES' } ],
