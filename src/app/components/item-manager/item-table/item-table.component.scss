@@ -11,40 +11,52 @@
     .mat-column{
       &-image{
         flex: 0 0 calc($img-thumbnail-size + $margin-s);
+
+        .thumb-container{
+          position: relative;
+          &__star{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: $yellow;
+          }
+        }
       }
-    
+
       &-title{
         flex: 0 0 7%;
       }
-    
+
       &-description{
         text-align: justify;
-        color: $grey;
       }
-      
+
       &-price{
-        flex: 0 0 5%;
+        flex: 0 0 6%;
         text-align: center;
-        color: $grey;
       }
-      
+
       &-email{
-        flex: 0 0 12%;
-        color: $grey;
+        flex: 0 0 14%;
       }
-    
+
       &-actions{
-        flex: 0 0 10%;
+        flex: 0 0 12%;
+        justify-content: flex-end;
+        .button{
+          min-width: 155px;
+        }
       }
     }
-    
+
     .mat-cell{
       padding: $padding-m;
     }
-    
+
     .mat-header-cell{
       padding: 0 $padding-m;
       font-size: $font-large;
+      color: $black;
     }
 
     .mat-header-row{

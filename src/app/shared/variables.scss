@@ -5,9 +5,10 @@ $light-grey: rgba(0,0,0,.4);
 $lightest-grey: rgba(0,0,0,.12);
 $darker-white: #f8f8f8;
 $dark-white: #fcfcfc;
-$primary-color: #3f51b5;
+$primary-color: rgb(19, 193, 172);
 $primary-light-color: #3f51b559;
 $warning-color: #fffab2ca;
+$yellow: #FFCC00;
 
 $font-title: 18px;
 $font-large: 15px;
@@ -28,3 +29,37 @@ $padding-s: 5px;
 $padding-m: 10px;
 $padding-l: 15px;
 $padding-xl: 25px;
+
+// created with http://mcg.mbitson.com/#!?mcgpalette0=%2313c1ac
+$material-custom-palette:(
+  50 : #e3f8f5,
+  100 : #b8ece6,
+  200 : #89e0d6,
+  300 : #5ad4c5,
+  400 : #36cab8,
+  500 : #13c1ac,
+  600 : #11bba5,
+  700 : #0eb39b,
+  800 : #0bab92,
+  900 : #069e82,
+  A100 : #cafff4,
+  A200 : #97ffe9,
+  A400 : #64ffdf,
+  A700 : #4affda,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);

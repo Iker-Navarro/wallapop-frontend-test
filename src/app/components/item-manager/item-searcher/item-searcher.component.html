@@ -18,20 +18,20 @@
     <mat-expansion-panel class="searcher__specific__expansion-panel">
 
       <mat-expansion-panel-header>
-        <mat-panel-title> 
+        <mat-panel-title>
           <mat-icon>filter_list</mat-icon>
-          <span class="searcher__specific__expansion-title">advanced search</span>
+          <span class="searcher__specific__expansion-title">Advanced search</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      
-      <div 
-        class="searcher__specific__note" 
+
+      <div
+        class="searcher__specific__note"
         *ngIf="displayNote"
-      > 
+      >
         <div class="searcher__specific__note__title">
           Warning!
         </div>
-        <mat-icon 
+        <mat-icon
           class="searcher__specific__note__close pointer"
           (click)="displayNote = !displayNote"
         >
@@ -41,33 +41,33 @@
           Using the advanced search will clear any search done with the general search option available above.
         </div>
       </div>
-      
+
       <app-searcher
         [clearEvent]="clearAdvSearchForm$"
-        [title]="'Search by title:'" 
+        [title]="'Search by title:'"
         [label]="'Title'"
         [icon]="'title'"
         [placeholder]="'Bolso...'"
         (onChange)="itemFilter.title = $event"
       ></app-searcher>
 
-      <app-searcher 
+      <app-searcher
         [clearEvent]="clearAdvSearchForm$"
-        [title]="'Search by description:'" 
-        [label]="'Description'" 
-        [icon]="'short_text'" 
+        [title]="'Search by description:'"
+        [label]="'Description'"
+        [icon]="'short_text'"
         [placeholder]="'Vendo sofá...'">
         (onChange)="itemFilter.description = $event"
       </app-searcher>
-      
-      <app-price-range-slider 
+
+      <app-price-range-slider
         [clearEvent]="clearAdvSearchForm$"
         (onChange)="itemFilter.priceRange = $event"
       ></app-price-range-slider>
-      
+
       <app-searcher
         [clearEvent]="clearAdvSearchForm$"
-        [title]="'Search by email:'" 
+        [title]="'Search by email:'"
         [label]="'Email'"
         [icon]="'alternate_email'"
         [placeholder]="'iphonemail@wa...'"

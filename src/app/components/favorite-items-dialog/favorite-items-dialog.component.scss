@@ -3,21 +3,17 @@
 .favorites-container{
   min-width: 400px;
 
-  .header{
-    &__title{
-      font-size: $font-title;
-      border-bottom: 1px solid $lightest-grey;
-      margin-bottom: $margin-m;
-    }
+  &__title{
+    font-size: $font-title;
+    border-bottom: 1px solid $lightest-grey;
+    padding-bottom: $padding-s;
+    margin-bottom: $margin-m;
   }
 
   .mat-column{
     &-image{
       flex: 0 0 calc($sm-img-thumbnail-size + $margin-s);
     }
-  
-    // &-title{
-    // }
 
     &-actions{
       flex: 0 0 25%;
@@ -29,7 +25,7 @@
   .mat-cell{
     padding: $padding-s $padding-m;
   }
-  
+
   .mat-header-cell{
     padding: 0 $padding-m;
     font-size: $font-large;
@@ -40,17 +36,11 @@
     display: flex;
     flex-direction: column;
 
-    &__title{
-      font-size: $font-title;
-      border-bottom: 1px solid $lightest-grey;
-      margin-bottom: $margin-m;
-    }
-
     &__message{
       text-align: justify;
       margin-bottom: $margin-m;
     }
-    
+
     &__button{
       margin-left: auto;
     }

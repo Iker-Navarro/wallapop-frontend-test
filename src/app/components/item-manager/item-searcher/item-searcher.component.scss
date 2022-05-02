@@ -16,6 +16,8 @@
   &__specific{
     &__expansion-panel{
       background-color: $dark-white;
+      box-shadow: none;
+      border: 1px solid $lightest-grey;
     }
 
     &__expansion-title{
@@ -30,7 +32,7 @@
       color: $grey;
       padding: $padding-m;
       box-shadow: 2px 2px 4px 0px $lightest-grey;
-      
+
       &__title{
         font-size: $font-large;
         border-bottom: 1px solid $lightest-grey;

@@ -2,7 +2,23 @@
 
 .header{
   padding: 0 calc($margin-l + $margin-xxl);
+
+  &__title{
+    display: flex;
+    align-items: center;
+
+    &__logo{
+      width: 30px;
+      height: 30px;
+      margin-right: $margin-l;
+    }
+  }
+
   &__spacer{
     flex: 1 1 auto;
+  }
+
+  &__button{
+    min-width: 160px;
   }
 }

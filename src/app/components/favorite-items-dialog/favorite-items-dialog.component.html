@@ -1,35 +1,33 @@
 <div class="favorites-container">
+  <div class="favorites-container__title">My Favourites</div>
   <ng-container *ngIf="favoritesDataSource.data.length > 0; else noFavorites">
-    <div class="header">
-      <div class="header__title">My Favourites</div>
       <app-searcher
         [label]="'Search favourite items'"
         [icon]="'search'"
         [placeholder]="'Bolso...'"
         (onKeyUp)="search($event)"
       ></app-searcher>
-    </div>
 
-    <mat-table #test [dataSource]="favoritesDataSource" matSort>
+      <mat-table #test [dataSource]="favoritesDataSource" matSort>
       <ng-container matColumnDef="image">
         <mat-cell mat-cell *matCellDef="let item">
-          <app-image-thumbnail 
-            [imageUrl]="item.image" 
+          <app-image-thumbnail
+            [imageUrl]="item.image"
             [title]="item.title"
             [isSmall]="true"
           ></app-image-thumbnail>
         </mat-cell>
       </ng-container>
-    
+
       <ng-container matColumnDef="title">
         <mat-cell mat-cell *matCellDef="let item">{{item.title}} </mat-cell>
       </ng-container>
-    
+
       <ng-container matColumnDef="actions">
-        <mat-cell mat-cell *matCellDef="let item"> 
-          <button 
-            mat-icon-button 
-            color="warn" 
+        <mat-cell mat-cell *matCellDef="let item">
+          <button
+            mat-icon-button
+            color="warn"
             (click)="removeItem(item)"
             aria-label="Remove from favourites"
           >
@@ -37,12 +35,12 @@
           </button>
         </mat-cell>
       </ng-container>
-      
+
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <mat-paginator 
+    <mat-paginator
       *ngIf="favoritesDataSource.data.length > 5"
-      [pageSizeOptions]="[5]" 
+      [pageSizeOptions]="[5]"
       [hidePageSize]="true"
       [showFirstLastButtons]="true"
       aria-label="Select page of favourite items"
@@ -50,11 +48,11 @@
   </ng-container>
   <ng-template #noFavorites>
     <div class="nothing-found">
-      <div class="nothing-found__title">You dont have any item marked as favourite!</div>
+      <div class="nothing-found__message">You dont have any item marked as favourite!</div>
       <div class="nothing-found__message">You may do so from the table found below this message, by pressing the "Make favourite" button available at the right hand side</div>
-      <button 
+      <button
         class="nothing-found__button"
-        mat-raised-button 
+        mat-raised-button
         color="primary"
         (click)="close()"
       >

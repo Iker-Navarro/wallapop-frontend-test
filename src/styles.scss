@@ -1,14 +1,25 @@
+@use '@angular/material' as mat;
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "/src/app/shared/variables.scss";
 
-/* You can add global styles to this file, and also import other style files */
+// CUSTOM MATERIAL CONFIG
+$custom-typography: mat-typography-config($font-family: '"Montserrat", sans-serif;');
+@include mat.core($custom-typography);
 
-html, body { 
-  height: 100%; 
+$custom-primary: mat.define-palette($material-custom-palette);
+$custom-accent: mat.define-palette($material-custom-palette);
+
+$custom-theme: mat.define-light-theme($custom-primary, $custom-accent);
+@include mat.all-component-themes($custom-theme);
+
+// GLOBAL CSS STYLE CHANGES
+html, body {
+  height: 100%;
 }
 
-body { 
+body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
   font-size: $font-default !important;
 }
 
@@ -23,3 +34,21 @@ body {
 .hidden-important{
   display: none !important;
 }
+
+.mat-raised-button.mat-primary{
+  color: white !important;
+}
+
+button{
+  border-radius: 100px !important;
+}
+
+.mat-sort-header-sorted .mat-sort-header-arrow {
+  transform: none !important;
+  opacity: 1 !important;
+}
+.mat-sort-header-arrow {
+  transform: none !important;
+  opacity: 0.2 !important;
+}
+

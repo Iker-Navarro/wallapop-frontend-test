@@ -81,6 +81,9 @@ export class ItemService {
   }
 
   private onError(message: string){
-    this.snackBar.open( message, "close", { duration: 3000 });
+    for (let index = 0; index < 5; index++) {
+      this.snackBar.open( message, "close", { duration: 3000 });
+    }
+
   }
 }
