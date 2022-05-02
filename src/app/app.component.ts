@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'wallapop-frontend-test';
+  title = 'Wallapop Frontend Test';
 }

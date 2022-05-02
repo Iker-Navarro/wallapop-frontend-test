@@ -15,8 +15,6 @@ export class ImageDisplayComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
-    
     this.url = this.data.url;
     this.title = this.data.title;
   }

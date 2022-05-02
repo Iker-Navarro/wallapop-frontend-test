@@ -16,7 +16,7 @@ export class ItemService {
   private getItemsUrl: string = `${baseApiUrl}/items.json`;
 
   private favorites: Item[] = [];
-  private currentFavorites: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([]); 
+  private currentFavorites: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>([]);
   public currentFavorites$: Observable<Item[]> = this.currentFavorites.asObservable();
 
   private applyFilter: Subject<FilterEvent> = new Subject<FilterEvent>();
@@ -37,9 +37,10 @@ export class ItemService {
         return items.map((item: Item) => {
           item.isFavorite = false;
           return item;
-        }); 
+        });
       }),
       tap((items: Item[])=>{
+        // Not optimal but better readability: change for a single loop if optimization is necesary
         const prices: number[] = items.map((item: Item) => Number(item.price));
         this.minMaxPrices.next({
           min: Math.min(...prices),
@@ -78,7 +79,7 @@ export class ItemService {
     this.favorites.splice(i, 1);
     this.currentFavorites.next(Object.assign([], this.favorites));
   }
-  
+
   private onError(message: string){
     this.snackBar.open( message, "close", { duration: 3000 });
   }

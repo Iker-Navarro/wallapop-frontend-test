@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ImageThumbnailComponent } from './image-thumbnail.component';
 
 describe('ImageThumbnailComponent', () => {
   let component: ImageThumbnailComponent;
   let fixture: ComponentFixture<ImageThumbnailComponent>;
+  let matDialogMock: any;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageThumbnailComponent ]
+      declarations: [ ImageThumbnailComponent ],
+      providers: [
+        {provide: MatDialog, useValue: matDialogMock},
+      ]
     })
     .compileComponents();
   });
