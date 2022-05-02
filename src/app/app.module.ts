@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 
 registerLocaleData(es);
@@ -38,7 +39,8 @@ registerLocaleData(es);
     ItemSearcherComponent,
     ItemTableComponent,
     SearcherComponent,
-    PriceRangeSliderComponent
+    PriceRangeSliderComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

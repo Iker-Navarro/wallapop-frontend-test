@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, catchError, Observable, BehaviorSubject, tap, ReplaySubject, Subject } from 'rxjs';
+import { ToastComponent } from '../shared/components/toast/toast.component';
 import { baseApiUrl } from '../shared/constants';
 import { FilterEvent } from '../shared/model/filterEvent';
 import { Item } from '../shared/model/Item';
@@ -72,6 +73,15 @@ export class ItemService {
   private addFavorite(item: Item){
     this.favorites.push(item);
     this.currentFavorites.next(Object.assign([], this.favorites));
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        message: "añadido",
+        isSvg: false,
+        icon: "star",
+        iconClass: "yellow"
+      },
+      panelClass: ['light-toast'],
+    });
   }
 
   private removeFavorite(item: Item){
@@ -84,6 +94,5 @@ export class ItemService {
     for (let index = 0; index < 5; index++) {
       this.snackBar.open( message, "close", { duration: 3000 });
     }
-
   }
 }

@@ -1,0 +1,7 @@
+<div class="toast">
+  <mat-icon *ngIf="isSvg" [svgIcon]="icon" class="toast__icon" class="toast__icon" [className]="iconClass ? iconClass : ''"></mat-icon>
+  <mat-icon  *ngIf="!isSvg" class="toast__icon" [className]="iconClass ? iconClass : ''">{{icon}}</mat-icon>
+
+  <div class="toast__message">{{ message }}</div>
+  <mat-icon class="toast__close">close</mat-icon>
+</div>
