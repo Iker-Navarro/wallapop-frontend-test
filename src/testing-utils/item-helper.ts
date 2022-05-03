@@ -1,19 +1,21 @@
 import { FilterEvent, SearchType } from "src/app/shared/model/filterEvent";
 import { Item } from "src/app/shared/model/Item";
+import { ItemFilter } from "src/app/shared/model/itemFilter";
 import { MinMax } from "src/app/shared/model/minMax";
 
 export class ItemHelper{
-  alphabet = new Array( 26 ).fill( 1 ).map( ( _, i ) => String.fromCharCode( 65 + i ) ).reverse();
+  private cyclingStrings = ["first", "second", "third", "repeat"];
 
   getItems(amount: number): Item[] {
     const items: Item[] = [];
     for (let i = 0; i < amount; i++) {
+      const cyclingIndex = i % this.cyclingStrings.length;
       items.push({
         title: "testing" + i,
-        description: "testing desc" + i,
-        email: "testing@testing.com" + i,
-        image: "testing.png" + i,
-        price: "" + ((0) * 11),
+        description: "testing desc" + (amount - i),
+        email: this.cyclingStrings[cyclingIndex] + "@testing.com",
+        image: "testing" + i + ".png",
+        price: "" + ((i + 1) * 10),
         isFavorite: false
       });
     }
@@ -34,10 +36,17 @@ export class ItemHelper{
     return items;
   }
 
-  getFilterEvent(): FilterEvent{
+  getGenericFilterEvent(term: string): FilterEvent{
     return {
-      filterTerm: "",
+      filterTerm: term,
       type: SearchType.Generic
+    }
+  }
+
+  getAdvancedFilter(jsonVal: ItemFilter): FilterEvent{
+    return {
+      filterTerm: JSON.stringify(jsonVal),
+      type: SearchType.Advanced
     }
   }
 }

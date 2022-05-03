@@ -10,7 +10,12 @@ export class DOMHelper<T> {
 
   getFirstElem(tagName: string) {
     const elem = this.fixture.debugElement.query(By.css(tagName));
-    return elem.nativeElement;
+    return elem?.nativeElement ;
+  }
+
+  getNthElement(tagName: string, n: number){
+    const elem = this.fixture.debugElement.queryAll(By.css(tagName));
+    return elem[n]?.nativeElement;
   }
 
   getFirstElemText(tagName: string): string {
@@ -18,29 +23,18 @@ export class DOMHelper<T> {
     if (elem) {
       return elem.nativeElement.textContent;
     }
-
     return "";
+  }
+
+  getNthElementText(tagName: string, n: number){
+    const elem = this.fixture.debugElement.queryAll(By.css(tagName));
+    return elem[n]?.nativeElement.textContent;
   }
 
   countElems(tagName: string): number {
     const elements = this.fixture.debugElement
       .queryAll(By.css(tagName));
     return elements.length;
-  }
-
-  countText(tagName: string, text: string): number {
-    const elements = this.fixture.debugElement
-      .queryAll(By.css(tagName));
-    return elements.filter(element => element.nativeElement.textContent === text).length;
-  }
-
-  clickButton(buttonText: string) {
-    this.findAll('button').forEach(button => {
-      const buttonElement: HTMLButtonElement = button.nativeElement;
-      if (buttonElement.textContent === buttonText) {
-        buttonElement.click();
-      }
-    });
   }
 
   findAll(tagName: string) {

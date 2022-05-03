@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { LOCALE_ID, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { ItemService } from 'src/app/services/item.service';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { ItemHelper } from 'src/testing-utils/item-helper';
@@ -10,7 +10,7 @@ import es from '@angular/common/locales/es';
 import { ItemTableComponent } from './item-table.component';
 import { DOMHelper } from 'src/testing-utils/dom-helper';
 import { Item } from 'src/app/shared/model/Item';
-import { MatPaginator } from '@angular/material/paginator';
+import { FilterEvent } from 'src/app/shared/model/filterEvent';
 
 describe('ItemTableComponent', () => {
   let component: ItemTableComponent;
@@ -26,7 +26,9 @@ describe('ItemTableComponent', () => {
 
   beforeEach(async () => {
     itemServiceMock = jasmine.createSpyObj('ItemService', ['getItems']);
-    itemServiceMock.applyFilter$ = of(itemHelper.getFilterEvent())
+    
+    itemServiceMock.applyFilter = new Subject<FilterEvent>()
+    itemServiceMock.applyFilter$ = itemServiceMock.applyFilter.asObservable();
 
     registerLocaleData(es);
     await TestBed.configureTestingModule({
@@ -134,14 +136,157 @@ describe('ItemTableComponent', () => {
         done()
       })
     })
+  })
 
-    it("correctly changes data on next page click", (done: DoneFn) => {
-      component.paginator.nextPage();
-      fixture.autoDetectChanges()
+  describe("test filtering and searches", ()=>{
+    let items: Item[];
+    beforeEach(()=>{
+      items = itemHelper.getItems(TEST_SAMPLE_SIZE);
+      itemServiceMock.getItems.and.returnValue(of(items));
+      fixture.detectChanges();
+    });
+
+    it("displays a message when nothing is found", (done: DoneFn)=>{
+      itemServiceMock.applyFilter.next(itemHelper.getGenericFilterEvent("asfas"))
+      fixture.detectChanges()
       fixture.whenStable().then(()=>{
-        expect(dh.getFirstElemText('mat-cell.mat-column-title')).toContain(items[PAGE_SIZE].title);
+        expect(dh.getFirstElem(".table-container__empty")).toBeTruthy();
         done();
       })
     })
+
+    it("filters out rows by using the generic search", (done: DoneFn)=>{
+      itemServiceMock.applyFilter.next(itemHelper.getGenericFilterEvent(items[8].title))
+      fixture.detectChanges()
+      fixture.whenStable().then(()=>{
+        expect(dh.countElems("mat-row")).toBe(1);
+        done();
+      })
+    })
+
+    describe("advanced search tests", ()=>{
+      
+      it("uses the advanced search to filter by title", (done: DoneFn)=>{
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          title: items[8].title,
+          description: "",
+          email: "",
+          priceRange: null
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          expect(dh.countElems("mat-row")).toBe(1);
+          done();
+        })
+      })
+
+      it("uses the advanced search to filter by description", (done: DoneFn)=>{
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          title: "",
+          description: items[3].description,
+          email: "",
+          priceRange: null
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          expect(dh.countElems("mat-row")).toBe(1);
+          done();
+        })
+      })
+
+      it("uses the advanced search to filter by email", (done: DoneFn)=>{
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          title: "",
+          description: "",
+          email: items[6].email,
+          priceRange: null
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          // 5 repeating emails containing "third"
+          expect(dh.countElems("mat-row")).toBe(5);
+          done();
+        })
+      })
+
+      it("uses the advanced search to filter by price range", (done: DoneFn)=>{
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          description: "",
+          email: "",
+          title: "",
+          priceRange: {
+            min: 0,
+            max: 30
+          }
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          // rows withprices 10, 20 & 30
+          expect(dh.countElems("mat-row")).toBe(3);
+          done();
+        })
+      })
+      
+      it("filters the data combining advanced filters", (done: DoneFn) => {
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          description: "test",
+          email: "first",
+          title: "",
+          priceRange: {
+            min: 30,
+            max: 60
+          }
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          expect(dh.countElems("mat-row")).toBe(1);
+          done();
+        })
+      })
+
+      it("filters the data over the maximum page capacity (5)", (done: DoneFn) => {
+        fixture.detectChanges();
+        itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
+          description: "",
+          email: "",
+          title: "",
+          priceRange: {
+            min: 110,
+            max: 200
+          }
+        }))
+        fixture.detectChanges()
+        fixture.whenStable().then(()=>{
+          // 10 prices from 110 to 200 in increments of 10
+          expect(component.itemsDataSource.filteredData.length).toBe(10);
+          done();
+        })
+      })
+    })
+  })
+
+  describe("favourites tests", () => {
+    let items: Item[];
+    beforeEach(()=>{
+      items = itemHelper.getItems(TEST_SAMPLE_SIZE);
+      items[1].isFavorite =
+      itemServiceMock.getItems.and.returnValue(of(items));
+      fixture.detectChanges();
+    });
+
+    it("saves favourite on button click", () => {
+      spyOn(component, 'changeFavorite');
+      dh.getFirstElem(".mat-column-actions button").click();
+      expect(component.changeFavorite).toHaveBeenCalledWith(items[0]);
+    })
+
+    it("has non favourite button style", () => {
+      expect(dh.getFirstElemText(".mat-column-actions button .mat-button-wrapper")).toBe(" Add favourite ");
+    })
+
+    it("changes style on favourited items", () => {
+      expect(dh.getNthElementText(".mat-column-actions button .mat-button-wrapper", 1)).toBe(" Remove favourite ");
+    })
+
   })
 });

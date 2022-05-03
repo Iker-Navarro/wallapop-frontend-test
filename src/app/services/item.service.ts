@@ -36,8 +36,6 @@ export class ItemService {
     .pipe(
       map(({items}) => {
         return items.map((item: Item, i) => {
-          item.title = "title"+i
-          item.price = "" + ((i+1) * 10)
           item.isFavorite = false;
           return item;
         });
