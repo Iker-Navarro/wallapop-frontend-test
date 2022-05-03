@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ItemManagerComponent } from './item-manager.component';
+import { ItemSearcherComponent } from './item-searcher/item-searcher.component';
+import { ItemTableComponent } from './item-table/item-table.component';
+import { MockComponent } from 'ng-mocks';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ItemManagerComponent', () => {
   let component: ItemManagerComponent;
@@ -8,7 +11,10 @@ describe('ItemManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemManagerComponent ]
+      declarations: [
+        ItemManagerComponent
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });

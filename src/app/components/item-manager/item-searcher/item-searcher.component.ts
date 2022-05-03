@@ -41,7 +41,7 @@ export class ItemSearcherComponent implements OnInit {
 
   public genericSearch(term: string){
     this.itemService.changeFilter({
-      filterTerm: term, 
+      filterTerm: term,
       type: SearchType.Generic
     })
   }
@@ -49,7 +49,7 @@ export class ItemSearcherComponent implements OnInit {
   public advancedSearch(){
     this.clearGnrSearchForm.next(true);
     this.itemService.changeFilter({
-      filterTerm: JSON.stringify(this.itemFilter), 
+      filterTerm: JSON.stringify(this.itemFilter),
       type: SearchType.Advanced
     })
   }

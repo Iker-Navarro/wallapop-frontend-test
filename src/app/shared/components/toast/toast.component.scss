@@ -1,24 +1,28 @@
 @import "/src/app/shared/variables.scss";
 
 .toast{
-  border: 1px solid black;
   display: flex;
   align-items: center;
-  &__icon{
 
+  &__icon{
   }
 
   .yellow{
-    color: $yellow !important;
+    color: $yellow;
+  }
+
+  .red{
+    color: $red;
   }
 
   &__message{
-
+    margin-left: $margin-m;
   }
 
   &__close{
+    transform: scale(.6);
     position: absolute;
-    right: 5px;
-    top: 10px;
+    right: 0;
+    top: 0;
   }
 }

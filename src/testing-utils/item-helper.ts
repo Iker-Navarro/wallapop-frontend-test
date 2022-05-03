@@ -1,18 +1,19 @@
 import { FilterEvent, SearchType } from "src/app/shared/model/filterEvent";
 import { Item } from "src/app/shared/model/Item";
-import { ItemFilter } from "src/app/shared/model/itemFilter";
 import { MinMax } from "src/app/shared/model/minMax";
 
 export class ItemHelper{
+  alphabet = new Array( 26 ).fill( 1 ).map( ( _, i ) => String.fromCharCode( 65 + i ) ).reverse();
+
   getItems(amount: number): Item[] {
     const items: Item[] = [];
     for (let i = 0; i < amount; i++) {
       items.push({
         title: "testing" + i,
-        description: "testing desc",
-        email: "testing@testing.com",
-        image: "testing.png",
-        price: "" + ((i + 1) * 10),
+        description: "testing desc" + i,
+        email: "testing@testing.com" + i,
+        image: "testing.png" + i,
+        price: "" + ((0) * 11),
         isFavorite: false
       });
     }

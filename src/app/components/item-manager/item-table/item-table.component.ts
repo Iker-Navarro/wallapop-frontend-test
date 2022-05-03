@@ -14,7 +14,8 @@ import { MinMax } from 'src/app/shared/model/minMax';
   styleUrls: ['./item-table.component.scss']
 })
 export class ItemTableComponent implements OnInit {
-  
+  public isMobileLayout = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -52,6 +53,9 @@ export class ItemTableComponent implements OnInit {
       this.activeFilterType = filterEvent.type;
       this.itemsDataSource.filter = filterEvent.filterTerm;
     })
+
+    window.onresize = () => this.isMobileLayout = window.innerWidth <= 991;
+
   }
 
   ngAfterViewInit(): void {
@@ -86,10 +90,10 @@ export class ItemTableComponent implements OnInit {
       }
       else{
         const filterJson: ItemFilter = JSON.parse(filter);
-        
+
         if(filterJson.title && !this.containsString(item.title, filterJson.title))
           return false;
-        
+
         if(filterJson.description && !this.containsString(item.description, filterJson.description))
           return false;
 
@@ -98,7 +102,7 @@ export class ItemTableComponent implements OnInit {
 
         if(filterJson.priceRange && !this.isPriceInRange(item.price, filterJson.priceRange))
           return false;
-          
+
         return true;
       }
     }

@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,7 +15,8 @@ describe('ImageThumbnailComponent', () => {
       declarations: [ ImageThumbnailComponent ],
       providers: [
         {provide: MatDialog, useValue: matDialogMock},
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });

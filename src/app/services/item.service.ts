@@ -35,7 +35,9 @@ export class ItemService {
     return this.http.get<ItemsResponse>(this.getItemsUrl)
     .pipe(
       map(({items}) => {
-        return items.map((item: Item) => {
+        return items.map((item: Item, i) => {
+          item.title = "title"+i
+          item.price = "" + ((i+1) * 10)
           item.isFavorite = false;
           return item;
         });
@@ -75,12 +77,13 @@ export class ItemService {
     this.currentFavorites.next(Object.assign([], this.favorites));
     this.snackBar.openFromComponent(ToastComponent, {
       data: {
-        message: "añadido",
+        message: `"${item.title}" added to favourites`,
         isSvg: false,
         icon: "star",
         iconClass: "yellow"
       },
       panelClass: ['light-toast'],
+      duration: 1500
     });
   }
 
@@ -88,11 +91,28 @@ export class ItemService {
     const i = this.favorites.findIndex(fav => fav === item);
     this.favorites.splice(i, 1);
     this.currentFavorites.next(Object.assign([], this.favorites));
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        message: `"${item.title}" removed from favourites`,
+        isSvg: false,
+        icon: "delete",
+        iconClass: "red"
+      },
+      panelClass: ['light-toast'],
+      duration: 1500
+    });
   }
 
   private onError(message: string){
-    for (let index = 0; index < 5; index++) {
-      this.snackBar.open( message, "close", { duration: 3000 });
-    }
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        message: message,
+        isSvg: false,
+        icon: "error",
+        iconClass: "red"
+      },
+      panelClass: ['light-toast-red'],
+      duration: 1500
+    });
   }
 }
