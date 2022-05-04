@@ -64,6 +64,17 @@ Depending on the path of the destination server it might be necessary to use the
   ng build --base-href [different-route]
 ```
 
+Finally the built appplication needs to be hosted in any http server to avoid CORS errors.
+
+For example ill be using [http-server](https://www.npmjs.com/package/http-server) to test the deployment locally.
+
+```
+  cd dist/wallapop-frontend-test
+  npx http-server
+```
+
+And with that you will have the application deployed in a http server.
+
 ## Notes
 
 Due to time constraints, not all the wanted objectives have been achieved in this current version of the application.
