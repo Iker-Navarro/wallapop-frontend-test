@@ -6,7 +6,7 @@ import { ToastComponent } from '../shared/components/toast/toast.component';
 import { baseApiUrl } from '../shared/constants';
 import { FilterEvent } from '../shared/model/filterEvent';
 import { Item } from '../shared/model/Item';
-import { ItemsResponse } from '../shared/model/itemsResponse';
+import { ItemsResponse, RawItem } from '../shared/model/itemsResponse';
 import { MinMax } from '../shared/model/minMax';
 
 @Injectable({
@@ -35,9 +35,10 @@ export class ItemService {
     return this.http.get<ItemsResponse>(this.getItemsUrl)
     .pipe(
       map(({items}) => {
-        return items.map((item: Item, i) => {
-          item.isFavorite = false;
-          return item;
+        return items.map((item: RawItem, i) => {
+          const endItem: any = Object.assign({}, item)
+          endItem.isFavorite = false;
+          return endItem as Item;
         });
       }),
       tap((items: Item[])=>{
@@ -109,7 +110,7 @@ export class ItemService {
         icon: "error",
         iconClass: "red"
       },
-      panelClass: ['light-toast-red'],
+      panelClass: ['light-toast'],
       duration: 1500
     });
   }

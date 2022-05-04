@@ -26,7 +26,7 @@ describe('ItemTableComponent', () => {
 
   beforeEach(async () => {
     itemServiceMock = jasmine.createSpyObj('ItemService', ['getItems']);
-    
+
     itemServiceMock.applyFilter = new Subject<FilterEvent>()
     itemServiceMock.applyFilter$ = itemServiceMock.applyFilter.asObservable();
 
@@ -165,7 +165,7 @@ describe('ItemTableComponent', () => {
     })
 
     describe("advanced search tests", ()=>{
-      
+
       it("uses the advanced search to filter by title", (done: DoneFn)=>{
         itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
           title: items[8].title,
@@ -226,7 +226,7 @@ describe('ItemTableComponent', () => {
           done();
         })
       })
-      
+
       it("filters the data combining advanced filters", (done: DoneFn) => {
         itemServiceMock.applyFilter.next(itemHelper.getAdvancedFilter({
           description: "test",
@@ -269,7 +269,7 @@ describe('ItemTableComponent', () => {
     let items: Item[];
     beforeEach(()=>{
       items = itemHelper.getItems(TEST_SAMPLE_SIZE);
-      items[1].isFavorite =
+      items[1].isFavorite = true;
       itemServiceMock.getItems.and.returnValue(of(items));
       fixture.detectChanges();
     });
@@ -285,7 +285,7 @@ describe('ItemTableComponent', () => {
     })
 
     it("changes style on favourited items", () => {
-      expect(dh.getNthElementText(".mat-column-actions button .mat-button-wrapper", 1)).toBe(" Remove favourite ");
+      expect(dh.getNthElementText(".mat-column-actions button .mat-button-wrapper", 2)).toBe(" Remove favourite ");
     })
 
   })

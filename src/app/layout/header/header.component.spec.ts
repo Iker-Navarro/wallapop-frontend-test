@@ -3,6 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, of } from 'rxjs';
+import { FavoriteItemsDialogComponent } from 'src/app/components/favorite-items-dialog/favorite-items-dialog.component';
 import { ItemService } from 'src/app/services/item.service';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { DOMHelper } from 'src/testing-utils/dom-helper';
@@ -27,6 +28,8 @@ describe('HeaderComponent', () => {
     itemServiceMock.currentFavorites = new BehaviorSubject([]);
     itemServiceMock.currentFavorites$ = itemServiceMock.currentFavorites.asObservable();
 
+    matDialogMock = jasmine.createSpyObj('MatDialog', ['open']);
+
     await TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       imports: [ MaterialModule, HttpClientModule ],
@@ -44,7 +47,6 @@ describe('HeaderComponent', () => {
     component = fixture.componentInstance;
     itemServiceMock.currentFavorites.next([]);
     dh = new DOMHelper(fixture);
-
     fixture.detectChanges();
   });
 
@@ -74,6 +76,7 @@ describe('HeaderComponent', () => {
       expect(favButton.classList.contains("mat-primary")).toBeFalse();
       done()
     })
+
   })
 
   it('should have mat-primary class with favorites', (done: DoneFn) => {
@@ -85,5 +88,10 @@ describe('HeaderComponent', () => {
       expect(favButton.classList.contains("mat-primary")).toBeTrue();
       done()
     })
+  })
+
+  it('should open favourites modal', () => {
+    dh.clickButtonByTagName(".header__button")
+    expect(matDialogMock.open).toHaveBeenCalledOnceWith(FavoriteItemsDialogComponent)
   })
 });

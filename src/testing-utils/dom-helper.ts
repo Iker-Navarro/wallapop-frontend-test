@@ -15,7 +15,7 @@ export class DOMHelper<T> {
 
   getNthElement(tagName: string, n: number){
     const elem = this.fixture.debugElement.queryAll(By.css(tagName));
-    return elem[n]?.nativeElement;
+    return elem[n-1]?.nativeElement;
   }
 
   getFirstElemText(tagName: string): string {
@@ -28,7 +28,7 @@ export class DOMHelper<T> {
 
   getNthElementText(tagName: string, n: number){
     const elem = this.fixture.debugElement.queryAll(By.css(tagName));
-    return elem[n]?.nativeElement.textContent;
+    return elem[n-1]?.nativeElement.textContent;
   }
 
   countElems(tagName: string): number {
@@ -40,5 +40,12 @@ export class DOMHelper<T> {
   findAll(tagName: string) {
     return this.fixture.debugElement
       .queryAll(By.css(tagName));
+  }
+
+  clickButtonByTagName(tagName: string){
+    const button = this.fixture.debugElement.query(By.css("button" + tagName))
+    if(button){
+      button.nativeElement.click();
+    }
   }
 }

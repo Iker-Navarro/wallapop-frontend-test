@@ -1,10 +1,25 @@
 import { FilterEvent, SearchType } from "src/app/shared/model/filterEvent";
 import { Item } from "src/app/shared/model/Item";
 import { ItemFilter } from "src/app/shared/model/itemFilter";
+import { ItemsResponse } from "src/app/shared/model/itemsResponse";
 import { MinMax } from "src/app/shared/model/minMax";
 
 export class ItemHelper{
   private cyclingStrings = ["first", "second", "third", "repeat"];
+
+  getDummyRequestItems(amount: number){
+    const res: ItemsResponse = { items : []}
+    res.items = [...Array(10)].map((el, i)=>{
+      return {
+        title: "request test " + i,
+        description: "request test description" + i,
+        email: `request${i}@test.com`,
+        image: `request_test${i}.png`,
+        price: "" + (i * 10)
+      }
+    })
+    return res;
+  }
 
   getItems(amount: number): Item[] {
     const items: Item[] = [];
@@ -49,4 +64,5 @@ export class ItemHelper{
       type: SearchType.Advanced
     }
   }
+
 }

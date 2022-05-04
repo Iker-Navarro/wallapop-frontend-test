@@ -16,10 +16,11 @@ export class ItemSearcherComponent implements OnInit {
 
   private clearAdvSearchForm: Subject<boolean> = new Subject<boolean>();
   public clearAdvSearchForm$: Observable<boolean> = this.clearAdvSearchForm.asObservable();
+
   public itemFilter: ItemFilter = {
+    title: "",
     description: "",
     email: "",
-    title: "",
     priceRange: null
   };
 
