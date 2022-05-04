@@ -29,18 +29,29 @@ export class ItemSearcherComponent implements OnInit {
   // flag to display warning message
   public displayNote: boolean = true;
 
+  private storedMinMax: MinMax;
+
   constructor(
     private itemService: ItemService,
   ) { }
 
   ngOnInit(): void {
     this.itemService.minMaxPrices$
-    .subscribe((minMax: MinMax) => this.itemFilter.priceRange = minMax)
+    .subscribe((minMax: MinMax) => {
+      this.storedMinMax = minMax;
+      this.itemFilter.priceRange = minMax;
+    })
   }
 
   public clearForm(){
     this.genericSearch("")
     this.clearAdvSearchForm.next(true);
+    this.itemFilter = {
+      title: "",
+      description: "",
+      email: "",
+      priceRange: this.storedMinMax
+    }
   }
 
   public genericSearch(term: string){
