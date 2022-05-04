@@ -54,6 +54,7 @@ export class ItemTableComponent implements OnInit {
     .subscribe((filterEvent: FilterEvent)=>{
       this.activeFilterType = filterEvent.type;
       this.itemsDataSource.filter = filterEvent.filterTerm;
+      this.loadFirstPage()
     })
   }
 
@@ -70,6 +71,10 @@ export class ItemTableComponent implements OnInit {
   public clearSearch(){
     this.activeFilterType = SearchType.Generic;
     this.itemsDataSource.filter = "";
+  }
+
+  public loadFirstPage(){
+    this.paginator.firstPage();
   }
 
   private initializeItems(items: Item[]){

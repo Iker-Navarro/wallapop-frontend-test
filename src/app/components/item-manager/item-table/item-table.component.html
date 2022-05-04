@@ -7,7 +7,7 @@
     [@.disabled]="true"
   >
     <ng-container matColumnDef="image">
-      <mat-header-cell mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let item">
         <div class="thumb-container">
           <app-image-thumbnail
@@ -21,22 +21,22 @@
     </ng-container>
 
     <ng-container matColumnDef="title">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header (click)="loadFirstPage()"> Title </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let item">{{item.title}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header (click)="loadFirstPage()"> Description </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header (click)="loadFirstPage()"> Price </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let item"> {{item.price | currency: 'EUR':'symbol':undefined:'es-ES'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header (click)="loadFirstPage()"> Email </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let item"> {{item.email}} </mat-cell>
     </ng-container>
 
