@@ -35,13 +35,15 @@ export class ItemService {
     return this.http.get<ItemsResponse>(this.getItemsUrl)
     .pipe(
       map(({items}) => {
-        return items.map((item: RawItem, i) => {
+        return items.map((item: RawItem) => {
+          // Assign by default all the items as 'not favourite'
           const endItem: any = Object.assign({}, item)
           endItem.isFavorite = false;
           return endItem as Item;
         });
       }),
       tap((items: Item[])=>{
+        // Get minimum and maximum prices
         // Not optimal but better readability: change for a single loop if optimization is necesary
         const prices: number[] = items.map((item: Item) => Number(item.price));
         this.minMaxPrices.next({

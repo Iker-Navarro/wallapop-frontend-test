@@ -35,8 +35,6 @@ export class MaterialModule {
 
   customSvgIcons: CustomIconData[] = [
     { icon: 'main-logo', url: '../../assets/icon/logo.svg', viewBox: "0 0 42 42" },
-    { icon: 'add-fav', url: '../../assets/icon/no-fav.svg', viewBox: "0 0 115 115" },
-    { icon: 'remove-fav', url: '../../assets/icon/fav.svg', viewBox: "0 0 115 115" },
   ]
 
   constructor(

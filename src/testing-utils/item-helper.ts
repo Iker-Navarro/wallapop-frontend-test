@@ -9,7 +9,7 @@ export class ItemHelper{
 
   getDummyRequestItems(amount: number){
     const res: ItemsResponse = { items : []}
-    res.items = [...Array(10)].map((el, i)=>{
+    res.items = [...Array(amount)].map((el, i)=>{
       return {
         title: "request test " + i,
         description: "request test description" + i,

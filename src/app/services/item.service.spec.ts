@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -8,7 +7,6 @@ import { ItemHelper } from 'src/testing-utils/item-helper';
 import { Item } from '../shared/model/Item';
 import { baseApiUrl } from '../shared/constants';
 import { MinMax } from '../shared/model/minMax';
-import { BehaviorSubject } from 'rxjs';
 
 describe('ItemService', () => {
   let service: ItemService;

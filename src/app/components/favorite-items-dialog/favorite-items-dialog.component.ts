@@ -62,6 +62,7 @@ export class FavoriteItemsDialogComponent implements OnInit, OnDestroy, AfterVie
     this.dialogRef.close();
   }
 
+  // Method to filter only by title ignoring the other item fields
   private getTitleFilterPredicate(){
     const filterPredicate = (item: Item, filter: string) => {
       return item.title.toUpperCase().includes(filter.toUpperCase());

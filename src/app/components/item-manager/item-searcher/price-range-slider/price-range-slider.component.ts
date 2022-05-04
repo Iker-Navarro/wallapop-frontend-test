@@ -16,6 +16,7 @@ export class PriceRangeSliderComponent implements OnInit, OnDestroy {
 
   public load: boolean = false;
   
+  // Properties needed for ngx-slider
   public minValue: number;
   public maxValue: number;
   public options: Options = {
@@ -29,15 +30,18 @@ export class PriceRangeSliderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.itemService.minMaxPrices$
-    .subscribe(({min, max})=>{
-      this.minValue = min;
-      this.maxValue = max;
-      this.options.floor = min;
-      this.options.ceil = max;
+    this.subscriptions.push(
+      this.itemService.minMaxPrices$
+      .subscribe(({min, max})=>{
+        this.minValue = min;
+        this.maxValue = max;
+        this.options.floor = min;
+        this.options.ceil = max;
+  
+        this.load = true;
+      })
+    )
 
-      this.load = true;
-    })
     if(this.clearEvent){
       this.subscriptions.push(
         this.clearEvent.subscribe((evt) => this.reset())

@@ -14,8 +14,6 @@ import { MinMax } from 'src/app/shared/model/minMax';
   styleUrls: ['./item-table.component.scss']
 })
 export class ItemTableComponent implements OnInit {
-  public isMobileLayout = false;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -29,7 +27,10 @@ export class ItemTableComponent implements OnInit {
     "actions"
   ];
 
+  // to store the current active filter type
   private activeFilterType: SearchType;
+
+  // columns to search in with the generic search input
   private genericSearchColumns: string[] = [
     "title",
     "description",
@@ -48,14 +49,12 @@ export class ItemTableComponent implements OnInit {
       error: (err) => this.onError(err)
     })
 
+    // recieve filter requests from service
     this.itemService.applyFilter$
     .subscribe((filterEvent: FilterEvent)=>{
       this.activeFilterType = filterEvent.type;
       this.itemsDataSource.filter = filterEvent.filterTerm;
     })
-
-    window.onresize = () => this.isMobileLayout = window.innerWidth <= 991;
-
   }
 
   ngAfterViewInit(): void {
@@ -78,17 +77,24 @@ export class ItemTableComponent implements OnInit {
   }
 
   private onError(err: Error){
+    // snackbar is automatically displayed from service
     console.error(err);
   }
 
   private getCustomFilterPredicate() {
+
+    // Function to create a different predicate depending on the current 'activeFilterType'
     const filterPredicate = (item: Item, filter: string) => {
       if(this.activeFilterType === SearchType.Generic){
+
+        // generic filter searches with single text in every field specified in 'genericSearchColumns'
         return this.genericSearchColumns.some((colName:string) => {
           return this.containsString(item[colName as keyof Item].toString(), filter);
         });
       }
       else{
+        
+        // Independently search each available field, empty field will make no filtering attempts
         const filterJson: ItemFilter = JSON.parse(filter);
 
         if(filterJson.title && !this.containsString(item.title, filterJson.title))

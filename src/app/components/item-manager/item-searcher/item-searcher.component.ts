@@ -11,12 +11,14 @@ import { MinMax } from 'src/app/shared/model/minMax';
   styleUrls: ['./item-searcher.component.scss']
 })
 export class ItemSearcherComponent implements OnInit {
+
   private clearGnrSearchForm: Subject<boolean> = new Subject<boolean>();
   public clearGnrSearchForm$: Observable<boolean> = this.clearGnrSearchForm.asObservable();
 
   private clearAdvSearchForm: Subject<boolean> = new Subject<boolean>();
   public clearAdvSearchForm$: Observable<boolean> = this.clearAdvSearchForm.asObservable();
 
+  // starting advanced item filter, empty
   public itemFilter: ItemFilter = {
     title: "",
     description: "",
@@ -24,6 +26,7 @@ export class ItemSearcherComponent implements OnInit {
     priceRange: null
   };
 
+  // flag to display warning message
   public displayNote: boolean = true;
 
   constructor(

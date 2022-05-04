@@ -1,14 +1,15 @@
 <div class="favorites-container">
   <div class="favorites-container__title">My Favourites</div>
   <ng-container *ngIf="favoritesDataSource.data.length > 0; else noFavorites">
-      <app-searcher
-        [label]="'Search favourite items'"
-        [icon]="'search'"
-        [placeholder]="'Bolso...'"
-        (onKeyUp)="search($event)"
-      ></app-searcher>
+    <app-searcher
+      [label]="'Search favourite items'"
+      [icon]="'search'"
+      [placeholder]="'Bolso...'"
+      (onKeyUp)="search($event)"
+    ></app-searcher>
 
-      <mat-table #test [dataSource]="favoritesDataSource" matSort>
+    <mat-table #test [dataSource]="favoritesDataSource" matSort>
+
       <ng-container matColumnDef="image">
         <mat-cell mat-cell *matCellDef="let item">
           <app-image-thumbnail
@@ -38,6 +39,7 @@
 
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+
     <mat-paginator
       *ngIf="favoritesDataSource.data.length > 5"
       [pageSizeOptions]="[5]"
@@ -45,7 +47,13 @@
       [showFirstLastButtons]="true"
       aria-label="Select page of favourite items"
     ></mat-paginator>
+
   </ng-container>
+
+  <div class="favorites-container__empty-search" *ngIf="favoritesDataSource.filteredData.length === 0 && favoritesDataSource.data.length > 0">
+    Nothing found matching the search done!
+  </div>
+  
   <ng-template #noFavorites>
     <div class="nothing-found">
       <div class="nothing-found__message">You dont have any item marked as favourite!</div>
