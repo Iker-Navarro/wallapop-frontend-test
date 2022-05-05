@@ -61,6 +61,7 @@ export class ItemTableComponent implements OnInit {
   ngAfterViewInit(): void {
     this.itemsDataSource.paginator = this.paginator;
     this.itemsDataSource.sort = this.sort;
+    this.itemsDataSource.sortingDataAccessor = (data: any, attribute) => ['price'].includes(attribute) ? +data[attribute] : data[attribute].toUpperCase();
     this.itemsDataSource.filterPredicate = this.getCustomFilterPredicate();
   }
 
@@ -98,7 +99,7 @@ export class ItemTableComponent implements OnInit {
         });
       }
       else{
-        
+
         // Independently search each available field, empty field will make no filtering attempts
         const filterJson: ItemFilter = JSON.parse(filter);
 
